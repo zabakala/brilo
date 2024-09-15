@@ -1,0 +1,98 @@
+{% extends "./base.html.twig" %}
+
+{% block stylesheets %}
+    <style>
+        section {
+            margin-bottom: 20px;
+        }
+
+        .bg-light-primary {
+            background-color: #f9fbff !important;
+        }
+
+        h6 {
+            min-height: 50px;
+            display: flex;
+            justify-content: center;
+            background: #f3f5fa70;
+            border-radius: 5px;;
+        }
+
+        h6 a {
+            align-self: center;
+            padding: 10px;
+        }
+
+        .py-6 {
+            padding-bottom: 3.75rem !important;
+        }
+
+        .py-6 {
+            padding-top: 3.75rem !important;
+        }
+
+        .hover-scale, .hover-scale:hover {
+            transition: transform .2s ease-in;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .4rem;
+            box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+        }
+
+        .card-body img {
+            border-radius: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Home - Posts{% endblock %}
+
+{% block body %}
+    <section class="py-6 bg-light-primary">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-4">
+                <div class="col-xl-6 col-lg-8 col-sm-10">
+                    <h2 class="font-weight-bold">The Perfect Blend of <span style="color: crimson">BRILO</span> Posts</h2>
+                    <p class="text-muted mb-0">We bring you posts helping you earn a developer post inside our company.</p>
+                </div>
+            </div>
+
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 text-center px-xl-6 aos-init aos-animate" data-aos="fade-up">
+                {% for post in paginator.items %}
+                    <div class="col my-3">
+                        <div class="card border-hover-primary hover-scale">
+                            <div class="card-body">
+                                <div class="text-primary mb-5">
+                                    <img class="d-block mx-auto mb-4" src="{{ logo }}" alt="60" height="60">
+                                </div>
+                                <h6 class="font-weight-bold mb-3">
+                                    <a href="/post/{{ post.title | seo }}">{{ post.title | title | preview(40) }}</a>
+                                </h6>
+                                <p class="text-muted mb-10">{{ post.body | capitalize | preview }}</p>
+                                <p class="mb-0" style="color: #8eb4ff"><span class="text-dark">By: </span>{{ post.user.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include './paginator.html.twig' %}
+{% endblock %}

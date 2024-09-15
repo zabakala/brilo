@@ -1,0 +1,9 @@
+twig:
+    file_name_pattern: '*.twig'
+
+    globals:
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHNPYKBVqS3-PAGPKJIAMP-T2m_ZzSU-gEzg&s'
+
+when@test:
+    twig:
+        strict_variables: true

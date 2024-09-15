@@ -1,0 +1,77 @@
+{% extends "./base.html.twig" %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        .card {
+            --mdb-surface-bg: #fff;
+            --mdb-box-shadow-color-rgb: 0, 0, 0;
+            --mdb-card-border-radius: 0.5rem;
+            --mdb-card-box-shadow: 0 2px 15px -3px rgba(var(--mdb-box-shadow-color-rgb), 0.07), 0 10px 20px -2px rgba(var(--mdb-box-shadow-color-rgb), 0.04);
+            --mdb-card-bg: var(--mdb-surface-bg);
+
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: var(--mdb-card-bg);
+            background-clip: border-box;
+            border-radius: var(--mdb-card-border-radius);
+            box-shadow: var(--mdb-card-box-shadow);
+            border: none !important;
+        }
+
+        .card.c1 {
+            border: none;
+            box-shadow: none;
+        }
+
+        .card-body {
+            text-align: left;
+        }
+
+        .post-body {
+            font-size: 1.1em;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .comment-body {
+            font-size: .9em;
+            color: #0000008a;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}{{ post.title | title }}{% endblock %}
+
+{% block body %}
+    <!--
+        Navigation
+    -->
+    {% include 'navigation/post.html.twig' %}
+
+    <div class="px-4 py-5 my-5 text-center">
+        <!--
+            Post
+        -->
+        <img class="d-block mx-auto mb-4" src="{{ logo }}" alt="60" height="60">
+
+        <h1 class="display-5 fw-bold">{{ post.title | title }}</h1>
+
+        <p class="mb-10" style="color: #8eb4ff"><span class="text-dark">By: </span>{{ post.user.name }}</p>
+
+        <div class="col-lg-6 mx-auto post-body">
+            {{ post.body | capitalize | repeat }}
+        </div>
+
+        <!--
+            Comments
+        -->
+        {% include 'post/comments.html.twig' %}
+    </div>
+{% endblock %}

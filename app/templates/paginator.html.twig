@@ -1,0 +1,35 @@
+{% block stylesheets %}
+    <style>
+        .paging {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+{% endblock %}
+
+{% set _currentPage = app.request.attributes.get('page') ?: 1 %}
+{% set _lastPage = paginator.lastPage %}
+
+{%  if paginator.lastPage > 1 %}
+    <nav class="paging">
+        <ul class="pagination justify-content-center">
+            <li class="page-item{{ _currentPage <= 1 ? ' disabled' : '' }}">
+                <a class="page-link" href="/posts/page/{{ _currentPage - 1 }}" aria-label="Previous">
+                    &laquo; Prev
+                </a>
+            </li>
+
+            {% for i in 1..paginator.lastPage %}
+                <li class="page-item {% if i == _currentPage %}active{% endif %}">
+                    <a class="page-link" href="/posts/page/{{ i }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            <li class="page-item {{ _currentPage >= paginator.lastPage ? ' disabled' : '' }}">
+                <a class="page-link" href="/posts/page/{{ _currentPage + 1 }}" aria-label="Next">
+                    Next &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}
